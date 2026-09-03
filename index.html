@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Personal Teaching Schedule untuk pengingat jadwal mengajar di SMK Jaya Buana."
+    >
+    <title>Personal Teaching Schedule</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+  </head>
+  <body>
+    <noscript>
+      Aplikasi ini memerlukan JavaScript agar dapat berjalan dengan baik.
+    </noscript>
+
+    <div id="app" class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+        <a class="brand" href="index.html" aria-label="Personal Teaching Schedule">
+          <span class="brand__mark" aria-hidden="true">PS</span>
+          <span>
+            <strong>Teaching Schedule</strong>
+            <small>SMK Jaya Buana</small>
+          </span>
+        </a>
+
+        <nav class="sidebar__nav">
+          <a class="nav-link nav-link--active" href="index.html" aria-current="page">
+            <span aria-hidden="true">⌂</span> Dashboard
+          </a>
+          <a class="nav-link" href="#jadwal-mingguan"><span aria-hidden="true">▦</span> Jadwal Mingguan</a>
+          <a class="nav-link" href="#kelola-jadwal"><span aria-hidden="true">✎</span> Kelola Jadwal</a>
+          <a class="nav-link" href="#pengaturan"><span aria-hidden="true">⚙</span> Backup &amp; Pengaturan</a>
+        </nav>
+
+        <p class="sidebar__footer">Personal Teaching Assistant</p>
+      </aside>
+
+      <button class="sidebar-backdrop" type="button" aria-label="Tutup menu navigasi" tabindex="-1"></button>
+
+      <div class="app-content">
+        <header class="topbar">
+          <div class="topbar__heading">
+            <button
+              class="menu-button"
+              type="button"
+              aria-label="Buka menu navigasi"
+              aria-controls="sidebar"
+              aria-expanded="false"
+            >
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </button>
+            <div>
+              <p class="eyebrow">Selamat datang</p>
+              <h1>Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="topbar__actions">
+            <div class="date-time" aria-label="Informasi tanggal dan waktu">
+              <strong>Hari dan tanggal</strong>
+              <span>Jam lokal</span>
+            </div>
+            <button class="icon-button" type="button" aria-label="Pengaturan tema" disabled>
+              <span aria-hidden="true">☼</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="dashboard" aria-label="Dashboard jadwal mengajar">
+          <section class="summary-grid" aria-label="Ringkasan jadwal">
+            <article class="card summary-card">
+              <div class="card__icon card__icon--primary" aria-hidden="true">▣</div>
+              <div>
+                <p>Jadwal Hari Ini</p>
+                <strong>—</strong>
+                <small>Total jadwal</small>
+              </div>
+            </article>
+
+            <article class="card summary-card">
+              <div class="card__icon card__icon--success" aria-hidden="true">✓</div>
+              <div>
+                <p>Total JP Hari Ini</p>
+                <strong>—</strong>
+                <small>Jam pelajaran</small>
+              </div>
+            </article>
+          </section>
+
+          <section class="dashboard-grid">
+            <article class="card panel panel--wide" id="jadwal-mingguan">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Senin sampai Jumat</p>
+                  <h2>Jadwal Mingguan</h2>
+                </div>
+                <span class="badge">Belum ada data</span>
+              </div>
+              <div class="weekday-list" aria-label="Daftar hari mengajar">
+                <div class="weekday-row"><strong>Senin</strong><span>Belum ada jadwal</span></div>
+                <div class="weekday-row"><strong>Selasa</strong><span>Belum ada jadwal</span></div>
+                <div class="weekday-row"><strong>Rabu</strong><span>Belum ada jadwal</span></div>
+                <div class="weekday-row"><strong>Kamis</strong><span>Belum ada jadwal</span></div>
+                <div class="weekday-row"><strong>Jumat</strong><span>Belum ada jadwal</span></div>
+              </div>
+            </article>
+
+            <div class="dashboard-stack">
+              <article class="card panel">
+                <div class="panel__header">
+                  <div>
+                    <p class="eyebrow">Status sekarang</p>
+                    <h2>Sedang Mengajar</h2>
+                  </div>
+                  <span class="status-dot" aria-hidden="true"></span>
+                </div>
+                <p class="panel__message">Tidak ada kelas yang sedang berlangsung.</p>
+              </article>
+
+              <article class="card panel">
+                <div class="panel__header">
+                  <div>
+                    <p class="eyebrow">Agenda terdekat</p>
+                    <h2>Jadwal Berikutnya</h2>
+                  </div>
+                </div>
+                <p class="panel__message">Belum ada kelas berikutnya.</p>
+                <div class="countdown-placeholder" aria-label="Countdown belum tersedia">
+                  <span>Mulai dalam</span>
+                  <strong>-- : -- : --</strong>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="js/database.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
