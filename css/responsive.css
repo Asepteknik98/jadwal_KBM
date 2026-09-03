@@ -156,15 +156,10 @@
     padding: 1.5rem 0.5rem;
   }
 
-  .weekday-group {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
-  }
-
-  .weekly-item {
-    grid-template-columns: 1fr auto;
-    gap: 0.65rem;
-    padding: 0.8rem;
+  .weekly-item__summary {
+    grid-template-columns: minmax(90px, auto) minmax(0, 1fr) auto 14px;
+    gap: 0.5rem;
+    padding: 0.6rem;
   }
 
   .today-item {
@@ -179,13 +174,13 @@
   }
 
   .weekly-item__detail {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 0.65rem;
   }
 
   .weekly-item__session {
-    grid-column: 2;
-    grid-row: 1;
+    padding-inline: 0.45rem;
   }
 
   .schedule-manager .panel__header {

@@ -82,31 +82,50 @@ const ScheduleManager = (() => {
     const activeSchedules = sortSchedules(schedules.filter((schedule) => schedule.statusAktif !== false));
     weeklyCount.textContent = `${activeSchedules.length} jadwal`;
 
+    const today = ["Minggu", ...DAY_ORDER, "Sabtu"][new Date().getDay()];
+
     weeklyList.innerHTML = DAY_ORDER.map((day) => {
       const daySchedules = activeSchedules.filter((schedule) => schedule.hari === day);
       const scheduleItems = daySchedules.length
         ? daySchedules.map((schedule) => `
-            <article class="weekly-item">
-              <div class="weekly-item__time">
-                <strong>${escapeHtml(schedule.jamMulai)}–${escapeHtml(schedule.jamSelesai)}</strong>
-                <span>${escapeHtml(formatTeachingPeriod(schedule))}</span>
-              </div>
-              <div class="weekly-item__detail">
+            <details class="weekly-item" data-accordion-level="schedule">
+              <summary class="weekly-item__summary">
+                <span class="weekly-item__time">${escapeHtml(schedule.jamMulai)}–${escapeHtml(schedule.jamSelesai)}</span>
                 <strong>${escapeHtml(schedule.kelas)}</strong>
-                <span>${escapeHtml(schedule.mataPelajaran)}</span>
+                <span class="weekly-item__session">${escapeHtml(schedule.sesi)}</span>
+                <span class="dropdown-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="weekly-item__detail">
+                <span><strong>Mata Pelajaran</strong>${escapeHtml(schedule.mataPelajaran)}</span>
+                <span><strong>Jam Pelajaran</strong>${escapeHtml(formatTeachingPeriod(schedule))}</span>
               </div>
-              <span class="weekly-item__session">${escapeHtml(schedule.sesi)}</span>
-            </article>
+            </details>
           `).join("")
         : '<p class="weekday-empty">Tidak ada jadwal</p>';
 
       return `
-        <section class="weekday-group" aria-labelledby="weekday-${day.toLowerCase()}">
-          <h3 id="weekday-${day.toLowerCase()}">${day}</h3>
+        <details class="weekday-dropdown" data-accordion-level="day" ${day === today ? "open" : ""}>
+          <summary class="weekday-dropdown__summary">
+            <strong>${day}</strong>
+            <span>${daySchedules.length} jadwal</span>
+            <span class="dropdown-chevron" aria-hidden="true"></span>
+          </summary>
           <div class="weekday-schedules">${scheduleItems}</div>
-        </section>
+        </details>
       `;
     }).join("");
+  }
+
+  function handleWeeklyAccordion(event) {
+    const openedDropdown = event.target;
+    if (!(openedDropdown instanceof HTMLDetailsElement) || !openedDropdown.open) return;
+
+    const level = openedDropdown.dataset.accordionLevel;
+    const { weeklyList } = getElements();
+
+    weeklyList.querySelectorAll(`details[data-accordion-level="${level}"][open]`).forEach((dropdown) => {
+      if (dropdown !== openedDropdown) dropdown.open = false;
+    });
   }
 
   function openForm(schedule = null) {
@@ -244,6 +263,7 @@ const ScheduleManager = (() => {
     elements.cancelButton.addEventListener("click", closeForm);
     elements.form.addEventListener("submit", handleSubmit);
     elements.list.addEventListener("click", handleListClick);
+    elements.weeklyList.addEventListener("toggle", handleWeeklyAccordion, true);
 
     try {
       await loadSchedules();
