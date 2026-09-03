@@ -46,17 +46,19 @@ const BackupManager = (() => {
 
   function isValidSchedule(schedule) {
     const requiredTextFields = ["hari", "jamMulai", "jamSelesai", "kelas", "mataPelajaran", "sesi"];
+    const periodStart = schedule?.jamKeMulai ?? schedule?.jamKe;
+    const periodEnd = schedule?.jamKeSelesai ?? schedule?.jamKe;
+    const hasNoPeriod = periodStart === undefined && periodEnd === undefined;
+    const hasValidPeriod = Number.isInteger(Number(periodStart))
+      && Number.isInteger(Number(periodEnd))
+      && Number(periodStart) >= 1
+      && Number(periodEnd) <= 6
+      && Number(periodStart) <= Number(periodEnd);
+
     return schedule
       && typeof schedule === "object"
       && requiredTextFields.every((field) => typeof schedule[field] === "string" && schedule[field].trim())
-      && (
-        schedule.jamKe === undefined
-        || (
-          Number.isInteger(Number(schedule.jamKe))
-          && Number(schedule.jamKe) >= 1
-          && Number(schedule.jamKe) <= 6
-        )
-      );
+      && (hasNoPeriod || hasValidPeriod);
   }
 
   function validateBackup(backup) {

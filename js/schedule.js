@@ -33,6 +33,14 @@ const ScheduleManager = (() => {
     });
   }
 
+  function formatTeachingPeriod(schedule) {
+    const start = schedule.jamKeMulai ?? schedule.jamKe;
+    const end = schedule.jamKeSelesai ?? schedule.jamKe;
+
+    if (!start || !end) return "Jam ke belum diatur";
+    return Number(start) === Number(end) ? `Jam ke-${start}` : `Jam ke-${start}–${end}`;
+  }
+
   function renderSchedules() {
     const { list } = getElements();
     if (!list) return;
@@ -55,7 +63,7 @@ const ScheduleManager = (() => {
           <span>${escapeHtml(schedule.jamSelesai)}</span>
         </div>
         <div class="schedule-item__content">
-          <span class="schedule-item__day">${escapeHtml(schedule.hari)} · ${escapeHtml(schedule.sesi)} · ${schedule.jamKe ? `Jam ke-${escapeHtml(schedule.jamKe)}` : "Jam ke belum diatur"}</span>
+          <span class="schedule-item__day">${escapeHtml(schedule.hari)} · ${escapeHtml(schedule.sesi)} · ${escapeHtml(formatTeachingPeriod(schedule))}</span>
           <h3>${escapeHtml(schedule.kelas)}</h3>
           <p>${escapeHtml(schedule.mataPelajaran)}</p>
         </div>
@@ -81,7 +89,7 @@ const ScheduleManager = (() => {
             <article class="weekly-item">
               <div class="weekly-item__time">
                 <strong>${escapeHtml(schedule.jamMulai)}–${escapeHtml(schedule.jamSelesai)}</strong>
-                <span>${schedule.jamKe ? `Jam ke-${escapeHtml(schedule.jamKe)}` : "Jam ke belum diatur"}</span>
+                <span>${escapeHtml(formatTeachingPeriod(schedule))}</span>
               </div>
               <div class="weekly-item__detail">
                 <strong>${escapeHtml(schedule.kelas)}</strong>
@@ -112,6 +120,9 @@ const ScheduleManager = (() => {
         const field = form.elements.namedItem(key);
         if (field) field.value = value ?? "";
       });
+
+      form.elements.namedItem("jamKeMulai").value = schedule.jamKeMulai ?? schedule.jamKe ?? "";
+      form.elements.namedItem("jamKeSelesai").value = schedule.jamKeSelesai ?? schedule.jamKe ?? "";
     }
 
     dialog.showModal();
@@ -130,7 +141,8 @@ const ScheduleManager = (() => {
       hari: data.get("hari").trim(),
       jamMulai: data.get("jamMulai"),
       jamSelesai: data.get("jamSelesai"),
-      jamKe: Number(data.get("jamKe")),
+      jamKeMulai: Number(data.get("jamKeMulai")),
+      jamKeSelesai: Number(data.get("jamKeSelesai")),
       kelas: data.get("kelas").trim(),
       mataPelajaran: data.get("mataPelajaran").trim(),
       sesi: data.get("sesi").trim(),
@@ -146,6 +158,10 @@ const ScheduleManager = (() => {
 
     if (schedule.jamSelesai <= schedule.jamMulai) {
       return "Jam selesai harus lebih akhir dari jam mulai.";
+    }
+
+    if (schedule.jamKeSelesai < schedule.jamKeMulai) {
+      return "Jam Ke Selesai tidak boleh lebih kecil dari Jam Ke Mulai.";
     }
 
     return "";

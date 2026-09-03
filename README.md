@@ -58,7 +58,7 @@ Kemudian buka `http://localhost:8000` di browser.
 
 1. Buka menu **Kelola Jadwal**.
 2. Pilih **Tambah Jadwal**.
-3. Isi hari, sesi, Jam Ke, waktu, kelas, dan mata pelajaran.
+3. Isi hari, sesi, rentang Jam Ke, waktu, kelas, dan mata pelajaran.
 4. Simpan jadwal.
 5. Lihat hasilnya melalui **Jadwal Mingguan** atau **Dashboard**.
 6. Gunakan **Backup & Pengaturan** untuk menyimpan identitas dan mengunduh cadangan data.
@@ -102,7 +102,7 @@ jadwal_KBM/
 
 - Data tidak tersinkronisasi otomatis antarperangkat karena tidak menggunakan backend.
 - Menghapus data browser dapat menghapus jadwal jika belum membuat backup.
-- Jadwal lama yang dibuat sebelum fitur Jam Ke ditambahkan dapat menampilkan “Jam ke belum diatur” sampai diedit.
+- Jadwal lama yang dibuat sebelum rentang Jam Ke ditambahkan tetap dibaca sebagai satu Jam Ke dan dapat diperbarui melalui menu edit.
 - Jadwal berikutnya dan countdown masih berupa placeholder.
 - Tombol tema belum diaktifkan.
 - Notifikasi pengingat belum tersedia.
@@ -126,4 +126,3 @@ Project ini terbuka untuk dipelajari dan dikembangkan kembali.
 3. Commit perubahan Anda.
 4. Push branch ke repository hasil fork.
 5. Buat pull request dengan penjelasan perubahan yang jelas.
-

@@ -20,6 +20,14 @@ const DashboardManager = (() => {
     return (hours * 60) + minutes;
   }
 
+  function formatTeachingPeriod(schedule) {
+    const start = schedule.jamKeMulai ?? schedule.jamKe;
+    const end = schedule.jamKeSelesai ?? schedule.jamKe;
+
+    if (!start || !end) return "Jam ke belum diatur";
+    return Number(start) === Number(end) ? `Jam ke-${start}` : `Jam ke-${start}–${end}`;
+  }
+
   function getTodaySchedules(date = new Date()) {
     const today = INDONESIAN_DAYS[date.getDay()];
     return schedules
@@ -73,7 +81,7 @@ const DashboardManager = (() => {
       <article class="today-item">
         <div class="today-item__time">
           <strong>${escapeHtml(schedule.jamMulai)}–${escapeHtml(schedule.jamSelesai)}</strong>
-          <span>${schedule.jamKe ? `Jam ke-${escapeHtml(schedule.jamKe)}` : "Jam ke belum diatur"}</span>
+          <span>${escapeHtml(formatTeachingPeriod(schedule))}</span>
         </div>
         <div class="today-item__detail">
           <strong>${escapeHtml(schedule.kelas)}</strong>
