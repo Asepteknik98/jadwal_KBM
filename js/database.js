@@ -64,10 +64,44 @@ const TeachingDatabase = (() => {
     return databasePromise;
   }
 
+  async function runScheduleRequest(mode, operation) {
+    const database = await openDatabase();
+
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(STORE_NAMES.schedules, mode);
+      const store = transaction.objectStore(STORE_NAMES.schedules);
+      const request = operation(store);
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error ?? new Error("Operasi jadwal gagal."));
+      transaction.onerror = () => reject(transaction.error ?? new Error("Transaksi jadwal gagal."));
+    });
+  }
+
+  function getAllSchedules() {
+    return runScheduleRequest("readonly", (store) => store.getAll());
+  }
+
+  function addSchedule(schedule) {
+    return runScheduleRequest("readwrite", (store) => store.add(schedule));
+  }
+
+  function updateSchedule(schedule) {
+    return runScheduleRequest("readwrite", (store) => store.put(schedule));
+  }
+
+  function deleteSchedule(id) {
+    return runScheduleRequest("readwrite", (store) => store.delete(id));
+  }
+
   return Object.freeze({
     name: DATABASE_NAME,
     stores: STORE_NAMES,
     open: openDatabase,
+    getAllSchedules,
+    addSchedule,
+    updateSchedule,
+    deleteSchedule,
   });
 })();
 

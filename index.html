@@ -141,11 +141,104 @@
               </article>
             </div>
           </section>
+
+          <section class="card panel schedule-manager" id="kelola-jadwal">
+            <div class="panel__header">
+              <div>
+                <p class="eyebrow">Data pribadi</p>
+                <h2>Kelola Jadwal</h2>
+              </div>
+              <button class="button button--primary" id="add-schedule-button" type="button">
+                + Tambah Jadwal
+              </button>
+            </div>
+
+            <p class="form-message" id="schedule-message" role="status" aria-live="polite"></p>
+            <div class="schedule-list" id="schedule-list"></div>
+          </section>
         </main>
       </div>
     </div>
 
+    <dialog class="schedule-dialog" id="schedule-dialog" aria-labelledby="schedule-dialog-title">
+      <form class="schedule-form" id="schedule-form">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Jadwal mengajar</p>
+            <h2 id="schedule-dialog-title">Tambah Jadwal</h2>
+          </div>
+          <button class="dialog-close" id="close-schedule-dialog" type="button" aria-label="Tutup">×</button>
+        </div>
+
+        <input id="schedule-id" name="id" type="hidden">
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Hari</span>
+            <select id="schedule-day" name="hari" required>
+              <option value="">Pilih hari</option>
+              <option>Senin</option>
+              <option>Selasa</option>
+              <option>Rabu</option>
+              <option>Kamis</option>
+              <option>Jumat</option>
+            </select>
+          </label>
+
+          <label class="form-field">
+            <span>Sesi</span>
+            <select id="schedule-session" name="sesi" required>
+              <option value="">Pilih sesi</option>
+              <option>Pagi</option>
+              <option>Siang</option>
+            </select>
+          </label>
+
+          <label class="form-field">
+            <span>Jam Mulai</span>
+            <input id="schedule-start" name="jamMulai" type="time" required>
+          </label>
+
+          <label class="form-field">
+            <span>Jam Selesai</span>
+            <input id="schedule-end" name="jamSelesai" type="time" required>
+          </label>
+
+          <label class="form-field">
+            <span>Kelas</span>
+            <input id="schedule-class" name="kelas" type="text" maxlength="50" placeholder="Contoh: 10 DTF 1" required>
+          </label>
+
+          <label class="form-field">
+            <span>Jumlah JP</span>
+            <input id="schedule-jp" name="jumlahJP" type="number" min="1" max="12" required>
+          </label>
+
+          <label class="form-field form-field--full">
+            <span>Mata Pelajaran</span>
+            <input id="schedule-subject" name="mataPelajaran" type="text" maxlength="100" required>
+          </label>
+
+          <label class="form-field form-field--full">
+            <span>Ruangan</span>
+            <input id="schedule-room" name="ruangan" type="text" maxlength="70" required>
+          </label>
+
+          <label class="form-field form-field--full">
+            <span>Catatan <small>(opsional)</small></span>
+            <textarea id="schedule-notes" name="catatan" rows="3" maxlength="300"></textarea>
+          </label>
+        </div>
+
+        <p class="form-error" id="schedule-form-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button class="button button--secondary" id="cancel-schedule-button" type="button">Batal</button>
+          <button class="button button--primary" type="submit">Simpan Jadwal</button>
+        </div>
+      </form>
+    </dialog>
+
     <script src="js/database.js" defer></script>
+    <script src="js/schedule.js" defer></script>
     <script src="js/app.js" defer></script>
   </body>
 </html>

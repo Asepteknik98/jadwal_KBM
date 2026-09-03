@@ -13,6 +13,7 @@ async function initializeApp() {
   try {
     await window.TeachingDatabase.open();
     app.dataset.database = "ready";
+    await window.ScheduleManager.initialize();
   } catch (error) {
     app.dataset.database = "error";
     console.error("Gagal menyiapkan database aplikasi:", error);
