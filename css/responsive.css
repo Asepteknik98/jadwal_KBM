@@ -63,11 +63,19 @@
   }
 
   .topbar {
-    min-height: 80px;
-    padding: 1rem;
+    min-height: 68px;
+    padding: 0.75rem 1rem;
   }
 
   .date-time {
+    font-size: 0.68rem;
+  }
+
+  .date-time span {
+    font-size: 0.68rem;
+  }
+
+  .topbar .icon-button {
     display: none;
   }
 
@@ -79,17 +87,26 @@
   .welcome-card {
     display: block;
     min-height: auto;
-    padding: 1rem;
+    margin-bottom: 0.75rem;
+    padding: 0.9rem 1rem;
   }
 
   .welcome-card img {
-    max-height: 90px;
-    margin: 0.75rem auto -1rem;
-    object-position: center bottom;
+    display: none;
+  }
+
+  .welcome-card h2 {
+    font-size: 1.15rem;
+  }
+
+  .welcome-card p:not(.eyebrow) {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
   }
 
   .summary-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
   }
 
   .dashboard-grid,
@@ -103,7 +120,35 @@
 
   .panel,
   .summary-card {
-    padding: 1rem;
+    padding: 0.85rem;
+  }
+
+  .summary-card {
+    gap: 0.55rem;
+  }
+
+  .summary-card .card__icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .summary-card strong {
+    font-size: 1.15rem;
+  }
+
+  .summary-card .summary-card__day {
+    font-size: 0.9rem;
+  }
+
+  .summary-card p,
+  .summary-card small {
+    font-size: 0.68rem;
+  }
+
+  .today-panel,
+  .dashboard-status-grid {
+    margin-top: 0.75rem;
   }
 
   .empty-state {
@@ -120,6 +165,17 @@
     grid-template-columns: 1fr auto;
     gap: 0.65rem;
     padding: 0.8rem;
+  }
+
+  .today-item {
+    grid-template-columns: 1fr auto;
+    gap: 0.65rem;
+    padding: 0.8rem;
+  }
+
+  .today-item__detail {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   .weekly-item__detail {
@@ -173,11 +229,27 @@
 
 @media (max-width: 390px) {
   .topbar h1 {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 
   .topbar .eyebrow {
     display: none;
+  }
+
+  .topbar__heading {
+    gap: 0.55rem;
+  }
+
+  .menu-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .date-time strong {
+    max-width: 125px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .panel__header {

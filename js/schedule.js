@@ -216,6 +216,7 @@ const ScheduleManager = (() => {
     schedules = await window.TeachingDatabase.getAllSchedules();
     renderSchedules();
     renderWeeklySchedule();
+    window.dispatchEvent(new CustomEvent("schedules:changed"));
   }
 
   async function initialize() {

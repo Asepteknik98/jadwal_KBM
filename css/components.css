@@ -192,6 +192,10 @@
   font-size: 1.5rem;
 }
 
+.summary-card .summary-card__day {
+  font-size: 1.1rem;
+}
+
 .summary-card small {
   font-size: 0.72rem;
 }
@@ -359,6 +363,56 @@
   border-radius: 50%;
   background: var(--border);
   box-shadow: 0 0 0 5px #f1f5f9;
+}
+
+.status-dot--active {
+  background: var(--success);
+  box-shadow: 0 0 0 5px #dcfce7;
+}
+
+.today-panel {
+  margin-top: 1rem;
+}
+
+.today-schedule-list {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.today-item {
+  display: grid;
+  grid-template-columns: 135px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--background);
+}
+
+.today-item__time,
+.today-item__detail,
+.current-schedule {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.today-item__time span,
+.today-item__detail span,
+.current-schedule span,
+.current-schedule small {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.current-schedule {
+  margin-top: 0.75rem;
+}
+
+.current-schedule__class {
+  color: var(--primary-dark);
+  font-size: 1.05rem;
 }
 
 .countdown-placeholder {

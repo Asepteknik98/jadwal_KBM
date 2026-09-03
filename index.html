@@ -67,8 +67,8 @@
 
           <div class="topbar__actions">
             <div class="date-time" aria-label="Informasi tanggal dan waktu">
-              <strong>Hari dan tanggal</strong>
-              <span>Jam lokal</span>
+              <strong id="current-date">Hari dan tanggal</strong>
+              <span id="current-time">Jam lokal</span>
             </div>
             <button class="icon-button" type="button" aria-label="Pengaturan tema" disabled>
               <span aria-hidden="true">☼</span>
@@ -92,7 +92,7 @@
               <div class="card__icon card__icon--primary" aria-hidden="true">▣</div>
               <div>
                 <p>Jadwal Hari Ini</p>
-                <strong>—</strong>
+                <strong id="today-schedule-count">—</strong>
                 <small>Total jadwal</small>
               </div>
             </article>
@@ -100,12 +100,25 @@
             <article class="card summary-card">
               <div class="card__icon card__icon--success" aria-hidden="true">✓</div>
               <div>
-                <p>Kelas Hari Ini</p>
-                <strong>—</strong>
-                <small>Kelas terjadwal</small>
+                <p>Hari Ini</p>
+                <strong class="summary-card__day" id="today-day-name">—</strong>
+                <small id="today-day-status">Memuat jadwal</small>
               </div>
             </article>
             </div>
+
+            <article class="card panel today-panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Agenda hari ini</p>
+                  <h2>Jadwal Hari Ini</h2>
+                </div>
+                <span class="badge" id="today-schedule-badge">0 jadwal</span>
+              </div>
+              <div class="today-schedule-list" id="today-schedule-list">
+                <p class="panel__message">Memuat jadwal hari ini...</p>
+              </div>
+            </article>
 
             <div class="dashboard-status-grid">
               <article class="card panel">
@@ -114,9 +127,11 @@
                     <p class="eyebrow">Status sekarang</p>
                     <h2>Sedang Mengajar</h2>
                   </div>
-                  <span class="status-dot" aria-hidden="true"></span>
+                  <span class="status-dot" id="current-status-dot" aria-hidden="true"></span>
                 </div>
-                <p class="panel__message">Tidak ada kelas yang sedang berlangsung.</p>
+                <div class="current-schedule" id="current-schedule">
+                  <p class="panel__message">Memeriksa jadwal saat ini...</p>
+                </div>
               </article>
 
               <article class="card panel">
@@ -292,6 +307,7 @@
     <script src="js/schedule.js" defer></script>
     <script src="js/settings.js" defer></script>
     <script src="js/backup.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
     <script src="js/app.js" defer></script>
   </body>
 </html>
