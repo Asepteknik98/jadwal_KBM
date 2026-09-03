@@ -3,6 +3,7 @@
 const ScheduleManager = (() => {
   const DAY_ORDER = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
   let schedules = [];
+  let editingScheduleId = null;
 
   function getElements() {
     return {
@@ -137,6 +138,7 @@ const ScheduleManager = (() => {
 
   function openForm(schedule = null) {
     const { dialog, form, formError, title } = getElements();
+    editingScheduleId = schedule?.id ?? null;
     form.reset();
     formError.textContent = "";
     title.textContent = schedule ? "Edit Jadwal" : "Tambah Jadwal";
@@ -155,15 +157,15 @@ const ScheduleManager = (() => {
   }
 
   function closeForm() {
+    editingScheduleId = null;
     getElements().dialog.close();
   }
 
   function readFormData(form) {
     const data = new FormData(form);
-    const id = Number(data.get("id"));
 
     return {
-      ...(id ? { id } : {}),
+      ...(editingScheduleId !== null ? { id: editingScheduleId } : {}),
       hari: data.get("hari").trim(),
       jamMulai: data.get("jamMulai"),
       jamSelesai: data.get("jamSelesai"),
@@ -277,6 +279,9 @@ const ScheduleManager = (() => {
     elements.addButton.addEventListener("click", () => openForm());
     elements.closeButton.addEventListener("click", closeForm);
     elements.cancelButton.addEventListener("click", closeForm);
+    elements.dialog.addEventListener("close", () => {
+      editingScheduleId = null;
+    });
     elements.form.addEventListener("submit", handleSubmit);
     elements.form.elements.namedItem("jamMulai").addEventListener("input", formatTimeInput);
     elements.form.elements.namedItem("jamSelesai").addEventListener("input", formatTimeInput);
