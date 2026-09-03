@@ -14,6 +14,7 @@ Website pribadi untuk mencatat dan mengingat jadwal mengajar mingguan di SMK Jay
 - Download dan restore backup dalam format JSON.
 - Reset data dengan konfirmasi dua tahap.
 - Tampilan responsif untuk desktop dan ponsel.
+- Dapat dipasang sebagai aplikasi (PWA) dan dibuka secara offline.
 
 ## Teknologi
 
@@ -53,6 +54,15 @@ python -m http.server 8000
 Kemudian buka `http://localhost:8000` di browser.
 
 `index.html` juga dapat dibuka langsung, tetapi local server direkomendasikan agar perilaku browser dan IndexedDB lebih konsisten.
+
+## Install sebagai Aplikasi
+
+1. Buka website melalui HTTPS atau `localhost` menggunakan browser yang mendukung PWA.
+2. Buka menu **Backup & Pengaturan**.
+3. Tekan **Install Aplikasi** ketika status instalasi sudah siap.
+4. Setelah terpasang, aplikasi dapat dibuka langsung dari layar utama atau daftar aplikasi perangkat.
+
+Service worker menyimpan file utama aplikasi agar antarmuka tetap dapat dibuka saat offline. Data jadwal tetap disimpan secara lokal melalui IndexedDB.
 
 ## Cara Menggunakan
 
@@ -94,6 +104,8 @@ jadwal_KBM/
 │   ├── dashboard.js
 │   ├── settings.js
 │   └── backup.js
+├── manifest.webmanifest
+├── sw.js
 ├── index.html
 └── README.md
 ```

@@ -18,6 +18,7 @@ async function initializeApp() {
     await window.SettingsManager.initialize();
     window.BackupManager.initialize();
     await window.DashboardManager.initialize();
+    window.PwaManager.initialize();
   } catch (error) {
     app.dataset.database = "error";
     console.error("Gagal menyiapkan database aplikasi:", error);

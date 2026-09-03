@@ -7,8 +7,13 @@
       name="description"
       content="Personal Teaching Schedule untuk pengingat jadwal mengajar di SMK Jaya Buana."
     >
+    <meta name="theme-color" content="#2563eb">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Personal Teaching Schedule</title>
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest.webmanifest">
 
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
@@ -184,6 +189,23 @@
 
           <section class="app-view" id="pengaturan" data-view="pengaturan" aria-label="Backup dan Pengaturan" hidden>
             <div class="settings-section">
+              <article class="card panel install-card">
+                <div class="panel__header">
+                  <div>
+                    <p class="eyebrow">Akses cepat</p>
+                    <h2>Install Aplikasi</h2>
+                  </div>
+                  <img src="assets/icons/logo.svg" alt="" width="42" height="42">
+                </div>
+                <p class="panel__message">Pasang di layar utama agar dapat dibuka seperti aplikasi dan tetap tersedia saat offline.</p>
+                <button class="button button--primary install-button" id="install-app-button" type="button">
+                  Install Aplikasi
+                </button>
+                <p class="install-status" id="install-app-status" role="status" aria-live="polite">
+                  Menyiapkan instalasi aplikasi...
+                </p>
+              </article>
+
               <article class="card panel">
               <div class="panel__header">
                 <div>
@@ -340,6 +362,7 @@
     <script src="js/settings.js" defer></script>
     <script src="js/backup.js" defer></script>
     <script src="js/dashboard.js" defer></script>
+    <script src="js/pwa.js" defer></script>
     <script src="js/app.js" defer></script>
   </body>
 </html>

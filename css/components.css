@@ -654,6 +654,31 @@ details[open] > summary .dropdown-chevron {
   color: var(--danger);
 }
 
+.install-card {
+  grid-column: 1 / -1;
+}
+
+.install-card .panel__header > img {
+  width: 42px;
+  height: 42px;
+}
+
+.install-button {
+  margin-top: 1rem;
+}
+
+.install-button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.install-status {
+  min-height: 1.2rem;
+  margin: 0.65rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+}
+
 .dialog-header h2 {
   margin: 0;
   font-size: 1.25rem;
