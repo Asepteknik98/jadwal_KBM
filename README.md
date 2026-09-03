@@ -58,7 +58,7 @@ Kemudian buka `http://localhost:8000` di browser.
 
 1. Buka menu **Kelola Jadwal**.
 2. Pilih **Tambah Jadwal**.
-3. Isi hari, sesi, rentang Jam Ke, waktu, kelas, dan mata pelajaran.
+3. Isi hari, sesi, rentang Jam Ke, waktu dalam format 24 jam (`HH:MM`), kelas, dan mata pelajaran.
 4. Simpan jadwal.
 5. Lihat hasilnya melalui **Jadwal Mingguan** atau **Dashboard**.
 6. Gunakan **Backup & Pengaturan** untuk menyimpan identitas dan mengunduh cadangan data.

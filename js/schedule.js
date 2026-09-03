@@ -41,6 +41,13 @@ const ScheduleManager = (() => {
     return Number(start) === Number(end) ? `Jam ke-${start}` : `Jam ke-${start}–${end}`;
   }
 
+  function formatTimeInput(event) {
+    const input = event.currentTarget;
+    const digits = input.value.replace(/\D/g, "").slice(0, 4);
+
+    input.value = digits.length > 2 ? `${digits.slice(0, 2)}:${digits.slice(2)}` : digits;
+  }
+
   function renderSchedules() {
     const { list } = getElements();
     if (!list) return;
@@ -170,6 +177,15 @@ const ScheduleManager = (() => {
   }
 
   function validateSchedule(schedule, form) {
+    const timePattern = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
+    if (
+      (schedule.jamMulai && !timePattern.test(schedule.jamMulai))
+      || (schedule.jamSelesai && !timePattern.test(schedule.jamSelesai))
+    ) {
+      return "Gunakan format waktu 24 jam HH:MM, contoh 10:40 dan 12:20.";
+    }
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return "Lengkapi semua kolom wajib dengan benar.";
@@ -262,6 +278,8 @@ const ScheduleManager = (() => {
     elements.closeButton.addEventListener("click", closeForm);
     elements.cancelButton.addEventListener("click", closeForm);
     elements.form.addEventListener("submit", handleSubmit);
+    elements.form.elements.namedItem("jamMulai").addEventListener("input", formatTimeInput);
+    elements.form.elements.namedItem("jamSelesai").addEventListener("input", formatTimeInput);
     elements.list.addEventListener("click", handleListClick);
     elements.weeklyList.addEventListener("toggle", handleWeeklyAccordion, true);
 

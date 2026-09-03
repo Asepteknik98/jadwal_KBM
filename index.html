@@ -288,13 +288,33 @@
           </label>
 
           <label class="form-field">
-            <span>Jam Mulai</span>
-            <input id="schedule-start" name="jamMulai" type="time" required>
+            <span>Jam Mulai <small>(24 jam)</small></span>
+            <input
+              id="schedule-start"
+              name="jamMulai"
+              type="text"
+              inputmode="numeric"
+              maxlength="5"
+              pattern="(?:[01][0-9]|2[0-3]):[0-5][0-9]"
+              placeholder="Contoh: 10:40"
+              title="Gunakan format 24 jam HH:MM, contoh 10:40"
+              required
+            >
           </label>
 
           <label class="form-field">
-            <span>Jam Selesai</span>
-            <input id="schedule-end" name="jamSelesai" type="time" required>
+            <span>Jam Selesai <small>(24 jam)</small></span>
+            <input
+              id="schedule-end"
+              name="jamSelesai"
+              type="text"
+              inputmode="numeric"
+              maxlength="5"
+              pattern="(?:[01][0-9]|2[0-3]):[0-5][0-9]"
+              placeholder="Contoh: 12:20"
+              title="Gunakan format 24 jam HH:MM, contoh 12:20"
+              required
+            >
           </label>
 
           <label class="form-field">
