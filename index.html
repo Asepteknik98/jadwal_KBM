@@ -8,6 +8,7 @@
       content="Personal Teaching Schedule untuk pengingat jadwal mengajar di SMK Jaya Buana."
     >
     <title>Personal Teaching Schedule</title>
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
@@ -23,7 +24,7 @@
     <div id="app" class="app-shell">
       <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
         <a class="brand" href="index.html" aria-label="Personal Teaching Schedule">
-          <span class="brand__mark" aria-hidden="true">PS</span>
+          <img class="brand__logo" src="assets/icons/logo.svg" alt="" width="48" height="48">
           <span>
             <strong>Teaching Schedule</strong>
             <small>SMK Jaya Buana</small>
@@ -31,12 +32,12 @@
         </a>
 
         <nav class="sidebar__nav">
-          <a class="nav-link nav-link--active" href="index.html" aria-current="page">
-            <span aria-hidden="true">⌂</span> Dashboard
+          <a class="nav-link nav-link--active" href="#dashboard" data-view-target="dashboard" aria-current="page">
+            <img src="assets/icons/dashboard.svg" alt="" width="20" height="20"> Dashboard
           </a>
-          <a class="nav-link" href="#jadwal-mingguan"><span aria-hidden="true">▦</span> Jadwal Mingguan</a>
-          <a class="nav-link" href="#kelola-jadwal"><span aria-hidden="true">✎</span> Kelola Jadwal</a>
-          <a class="nav-link" href="#pengaturan"><span aria-hidden="true">⚙</span> Backup &amp; Pengaturan</a>
+          <a class="nav-link" href="#jadwal-mingguan" data-view-target="jadwal-mingguan"><img src="assets/icons/calendar.svg" alt="" width="20" height="20"> Jadwal Mingguan</a>
+          <a class="nav-link" href="#kelola-jadwal" data-view-target="kelola-jadwal"><img src="assets/icons/edit.svg" alt="" width="20" height="20"> Kelola Jadwal</a>
+          <a class="nav-link" href="#pengaturan" data-view-target="pengaturan"><img src="assets/icons/settings.svg" alt="" width="20" height="20"> Backup &amp; Pengaturan</a>
         </nav>
 
         <p class="sidebar__footer">Personal Teaching Assistant</p>
@@ -60,7 +61,7 @@
             </button>
             <div>
               <p class="eyebrow">Selamat datang</p>
-              <h1>Dashboard</h1>
+              <h1 id="view-title">Dashboard</h1>
             </div>
           </div>
 
@@ -75,8 +76,18 @@
           </div>
         </header>
 
-        <main class="dashboard" aria-label="Dashboard jadwal mengajar">
-          <section class="summary-grid" aria-label="Ringkasan jadwal">
+        <main class="dashboard" aria-label="Aplikasi jadwal mengajar">
+          <section class="app-view" id="dashboard" data-view="dashboard" aria-label="Dashboard">
+            <div class="welcome-card">
+              <div>
+                <p class="eyebrow">Personal Teaching Assistant</p>
+                <h2>Jadwal mengajar lebih teratur</h2>
+                <p>Lihat kelas hari ini dan persiapkan jadwal berikutnya dengan lebih mudah.</p>
+              </div>
+              <img src="assets/images/teaching-illustration.svg" alt="Ilustrasi guru dan papan jadwal" width="520" height="260">
+            </div>
+
+            <div class="summary-grid" aria-label="Ringkasan jadwal">
             <article class="card summary-card">
               <div class="card__icon card__icon--primary" aria-hidden="true">▣</div>
               <div>
@@ -89,32 +100,14 @@
             <article class="card summary-card">
               <div class="card__icon card__icon--success" aria-hidden="true">✓</div>
               <div>
-                <p>Total JP Hari Ini</p>
+                <p>Kelas Hari Ini</p>
                 <strong>—</strong>
-                <small>Jam pelajaran</small>
+                <small>Kelas terjadwal</small>
               </div>
             </article>
-          </section>
+            </div>
 
-          <section class="dashboard-grid">
-            <article class="card panel panel--wide" id="jadwal-mingguan">
-              <div class="panel__header">
-                <div>
-                  <p class="eyebrow">Senin sampai Jumat</p>
-                  <h2>Jadwal Mingguan</h2>
-                </div>
-                <span class="badge">Belum ada data</span>
-              </div>
-              <div class="weekday-list" aria-label="Daftar hari mengajar">
-                <div class="weekday-row"><strong>Senin</strong><span>Belum ada jadwal</span></div>
-                <div class="weekday-row"><strong>Selasa</strong><span>Belum ada jadwal</span></div>
-                <div class="weekday-row"><strong>Rabu</strong><span>Belum ada jadwal</span></div>
-                <div class="weekday-row"><strong>Kamis</strong><span>Belum ada jadwal</span></div>
-                <div class="weekday-row"><strong>Jumat</strong><span>Belum ada jadwal</span></div>
-              </div>
-            </article>
-
-            <div class="dashboard-stack">
+            <div class="dashboard-status-grid">
               <article class="card panel">
                 <div class="panel__header">
                   <div>
@@ -142,19 +135,79 @@
             </div>
           </section>
 
-          <section class="card panel schedule-manager" id="kelola-jadwal">
-            <div class="panel__header">
-              <div>
-                <p class="eyebrow">Data pribadi</p>
-                <h2>Kelola Jadwal</h2>
+          <section class="app-view" id="jadwal-mingguan" data-view="jadwal-mingguan" aria-label="Jadwal Mingguan" hidden>
+            <article class="card panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Senin sampai Jumat</p>
+                  <h2>Jadwal Mingguan</h2>
+                </div>
+                <span class="badge" id="weekly-schedule-count">0 jadwal</span>
               </div>
-              <button class="button button--primary" id="add-schedule-button" type="button">
-                + Tambah Jadwal
-              </button>
-            </div>
+              <div class="weekday-list" id="weekly-schedule-list" aria-label="Daftar jadwal Senin sampai Jumat">
+                <p class="weekly-loading">Memuat jadwal...</p>
+              </div>
+            </article>
+          </section>
 
-            <p class="form-message" id="schedule-message" role="status" aria-live="polite"></p>
-            <div class="schedule-list" id="schedule-list"></div>
+          <section class="app-view" id="kelola-jadwal" data-view="kelola-jadwal" aria-label="Kelola Jadwal" hidden>
+            <article class="card panel schedule-manager">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Data pribadi</p>
+                  <h2>Kelola Jadwal</h2>
+                </div>
+                <button class="button button--primary" id="add-schedule-button" type="button">
+                  + Tambah Jadwal
+                </button>
+              </div>
+
+              <p class="form-message" id="schedule-message" role="status" aria-live="polite"></p>
+              <div class="schedule-list" id="schedule-list"></div>
+            </article>
+          </section>
+
+          <section class="app-view" id="pengaturan" data-view="pengaturan" aria-label="Backup dan Pengaturan" hidden>
+            <div class="settings-section">
+              <article class="card panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Identitas aplikasi</p>
+                  <h2>Pengaturan</h2>
+                </div>
+              </div>
+
+              <form class="settings-form" id="settings-form">
+                <label class="form-field">
+                  <span>Nama Anda</span>
+                  <input id="user-name" name="userName" type="text" maxlength="70" placeholder="Nama pengguna">
+                </label>
+                <label class="form-field">
+                  <span>Nama Sekolah</span>
+                  <input id="school-name" name="schoolName" type="text" maxlength="100" value="SMK Jaya Buana" required>
+                </label>
+                <button class="button button--primary" type="submit">Simpan Pengaturan</button>
+              </form>
+              <p class="form-message" id="settings-message" role="status" aria-live="polite"></p>
+              </article>
+
+              <article class="card panel">
+              <div class="panel__header">
+                <div>
+                  <p class="eyebrow">Penyimpanan lokal</p>
+                  <h2>Backup Data</h2>
+                </div>
+              </div>
+              <p class="panel__message">Simpan salinan jadwal dan pengaturan Anda dalam file JSON.</p>
+              <div class="backup-actions">
+                <button class="button button--primary" id="download-backup-button" type="button">Download Backup</button>
+                <button class="button button--secondary" id="restore-backup-button" type="button">Restore Backup</button>
+                <button class="button button--danger" id="reset-data-button" type="button">Reset Semua Data</button>
+                <input id="backup-file-input" type="file" accept="application/json,.json" hidden>
+              </div>
+              <p class="form-message backup-message" id="backup-message" role="status" aria-live="polite"></p>
+              </article>
+            </div>
           </section>
         </main>
       </div>
@@ -194,6 +247,19 @@
           </label>
 
           <label class="form-field">
+            <span>Jam Ke</span>
+            <select id="schedule-period" name="jamKe" required>
+              <option value="">Pilih jam ke</option>
+              <option value="1">Jam ke-1</option>
+              <option value="2">Jam ke-2</option>
+              <option value="3">Jam ke-3</option>
+              <option value="4">Jam ke-4</option>
+              <option value="5">Jam ke-5</option>
+              <option value="6">Jam ke-6</option>
+            </select>
+          </label>
+
+          <label class="form-field">
             <span>Jam Mulai</span>
             <input id="schedule-start" name="jamMulai" type="time" required>
           </label>
@@ -208,24 +274,9 @@
             <input id="schedule-class" name="kelas" type="text" maxlength="50" placeholder="Contoh: 10 DTF 1" required>
           </label>
 
-          <label class="form-field">
-            <span>Jumlah JP</span>
-            <input id="schedule-jp" name="jumlahJP" type="number" min="1" max="12" required>
-          </label>
-
           <label class="form-field form-field--full">
             <span>Mata Pelajaran</span>
             <input id="schedule-subject" name="mataPelajaran" type="text" maxlength="100" required>
-          </label>
-
-          <label class="form-field form-field--full">
-            <span>Ruangan</span>
-            <input id="schedule-room" name="ruangan" type="text" maxlength="70" required>
-          </label>
-
-          <label class="form-field form-field--full">
-            <span>Catatan <small>(opsional)</small></span>
-            <textarea id="schedule-notes" name="catatan" rows="3" maxlength="300"></textarea>
           </label>
         </div>
 
@@ -239,6 +290,8 @@
 
     <script src="js/database.js" defer></script>
     <script src="js/schedule.js" defer></script>
+    <script src="js/settings.js" defer></script>
+    <script src="js/backup.js" defer></script>
     <script src="js/app.js" defer></script>
   </body>
 </html>

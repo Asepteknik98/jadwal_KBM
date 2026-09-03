@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustrasi jadwal mengajar</title>
+  <desc id="desc">Guru berdiri di samping papan jadwal pelajaran.</desc>
+  <rect width="520" height="260" rx="28" fill="#eff6ff"/>
+  <circle cx="438" cy="46" r="62" fill="#dbeafe"/>
+  <circle cx="73" cy="226" r="78" fill="#e0e7ff"/>
+  <rect x="182" y="42" width="276" height="166" rx="14" fill="#fff" stroke="#bfdbfe" stroke-width="3"/>
+  <rect x="204" y="66" width="112" height="16" rx="8" fill="#2563eb"/>
+  <rect x="204" y="101" width="230" height="22" rx="8" fill="#f1f5f9"/>
+  <rect x="218" y="107" width="56" height="10" rx="5" fill="#93c5fd"/>
+  <rect x="286" y="107" width="72" height="10" rx="5" fill="#cbd5e1"/>
+  <rect x="370" y="107" width="46" height="10" rx="5" fill="#86efac"/>
+  <rect x="204" y="135" width="230" height="22" rx="8" fill="#f1f5f9"/>
+  <rect x="218" y="141" width="56" height="10" rx="5" fill="#93c5fd"/>
+  <rect x="286" y="141" width="94" height="10" rx="5" fill="#cbd5e1"/>
+  <rect x="204" y="169" width="170" height="22" rx="8" fill="#f1f5f9"/>
+  <rect x="218" y="175" width="56" height="10" rx="5" fill="#93c5fd"/>
+  <rect x="286" y="175" width="70" height="10" rx="5" fill="#fde68a"/>
+  <circle cx="119" cy="91" r="29" fill="#f2c6a0"/>
+  <path d="M91 89c0-24 13-37 29-37 20 0 32 15 29 40-10-2-18-9-23-20-6 10-18 16-35 17Z" fill="#1e293b"/>
+  <path d="M78 201c3-55 15-82 41-82 28 0 43 27 47 82H78Z" fill="#2563eb"/>
+  <path d="m147 139 48-34 8 12-45 43" fill="#f2c6a0"/>
+  <path d="M107 126h25l-4 27h-17l-4-27Z" fill="#fff" opacity=".9"/>
+  <rect x="65" y="201" width="112" height="12" rx="6" fill="#1d4ed8"/>
+</svg>

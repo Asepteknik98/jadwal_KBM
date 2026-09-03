@@ -2,6 +2,18 @@
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-card {
+    grid-template-columns: minmax(0, 1fr) 210px;
+  }
+
+  .settings-section {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -64,6 +76,18 @@
     padding: 1rem;
   }
 
+  .welcome-card {
+    display: block;
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .welcome-card img {
+    max-height: 90px;
+    margin: 0.75rem auto -1rem;
+    object-position: center bottom;
+  }
+
   .summary-grid {
     grid-template-columns: 1fr;
   }
@@ -87,10 +111,25 @@
     padding: 1.5rem 0.5rem;
   }
 
-  .weekday-row {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 0.75rem;
-    padding-inline: 0.75rem;
+  .weekday-group {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .weekly-item {
+    grid-template-columns: 1fr auto;
+    gap: 0.65rem;
+    padding: 0.8rem;
+  }
+
+  .weekly-item__detail {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .weekly-item__session {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .schedule-manager .panel__header {
@@ -120,6 +159,15 @@
 
   .form-field--full {
     grid-column: auto;
+  }
+
+  .settings-section {
+    gap: 1rem;
+  }
+
+  .settings-form .button,
+  .backup-actions .button {
+    width: 100%;
   }
 }
 

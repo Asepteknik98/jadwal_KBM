@@ -9,6 +9,8 @@ const ScheduleManager = (() => {
       dialog: document.querySelector("#schedule-dialog"),
       form: document.querySelector("#schedule-form"),
       list: document.querySelector("#schedule-list"),
+      weeklyList: document.querySelector("#weekly-schedule-list"),
+      weeklyCount: document.querySelector("#weekly-schedule-count"),
       message: document.querySelector("#schedule-message"),
       formError: document.querySelector("#schedule-form-error"),
       title: document.querySelector("#schedule-dialog-title"),
@@ -53,10 +55,9 @@ const ScheduleManager = (() => {
           <span>${escapeHtml(schedule.jamSelesai)}</span>
         </div>
         <div class="schedule-item__content">
-          <span class="schedule-item__day">${escapeHtml(schedule.hari)} · ${escapeHtml(schedule.sesi)}</span>
+          <span class="schedule-item__day">${escapeHtml(schedule.hari)} · ${escapeHtml(schedule.sesi)} · ${schedule.jamKe ? `Jam ke-${escapeHtml(schedule.jamKe)}` : "Jam ke belum diatur"}</span>
           <h3>${escapeHtml(schedule.kelas)}</h3>
           <p>${escapeHtml(schedule.mataPelajaran)}</p>
-          <small>${escapeHtml(schedule.ruangan)} · ${escapeHtml(schedule.jumlahJP)} JP</small>
         </div>
         <div class="schedule-item__actions">
           <button class="button button--small button--secondary" type="button" data-action="edit" data-id="${schedule.id}">Edit</button>
@@ -64,6 +65,40 @@ const ScheduleManager = (() => {
         </div>
       </article>
     `).join("");
+  }
+
+  function renderWeeklySchedule() {
+    const { weeklyList, weeklyCount } = getElements();
+    if (!weeklyList || !weeklyCount) return;
+
+    const activeSchedules = sortSchedules(schedules.filter((schedule) => schedule.statusAktif !== false));
+    weeklyCount.textContent = `${activeSchedules.length} jadwal`;
+
+    weeklyList.innerHTML = DAY_ORDER.map((day) => {
+      const daySchedules = activeSchedules.filter((schedule) => schedule.hari === day);
+      const scheduleItems = daySchedules.length
+        ? daySchedules.map((schedule) => `
+            <article class="weekly-item">
+              <div class="weekly-item__time">
+                <strong>${escapeHtml(schedule.jamMulai)}–${escapeHtml(schedule.jamSelesai)}</strong>
+                <span>${schedule.jamKe ? `Jam ke-${escapeHtml(schedule.jamKe)}` : "Jam ke belum diatur"}</span>
+              </div>
+              <div class="weekly-item__detail">
+                <strong>${escapeHtml(schedule.kelas)}</strong>
+                <span>${escapeHtml(schedule.mataPelajaran)}</span>
+              </div>
+              <span class="weekly-item__session">${escapeHtml(schedule.sesi)}</span>
+            </article>
+          `).join("")
+        : '<p class="weekday-empty">Tidak ada jadwal</p>';
+
+      return `
+        <section class="weekday-group" aria-labelledby="weekday-${day.toLowerCase()}">
+          <h3 id="weekday-${day.toLowerCase()}">${day}</h3>
+          <div class="weekday-schedules">${scheduleItems}</div>
+        </section>
+      `;
+    }).join("");
   }
 
   function openForm(schedule = null) {
@@ -95,12 +130,10 @@ const ScheduleManager = (() => {
       hari: data.get("hari").trim(),
       jamMulai: data.get("jamMulai"),
       jamSelesai: data.get("jamSelesai"),
+      jamKe: Number(data.get("jamKe")),
       kelas: data.get("kelas").trim(),
       mataPelajaran: data.get("mataPelajaran").trim(),
-      ruangan: data.get("ruangan").trim(),
       sesi: data.get("sesi").trim(),
-      jumlahJP: Number(data.get("jumlahJP")),
-      catatan: data.get("catatan").trim(),
       statusAktif: true,
     };
   }
@@ -182,6 +215,7 @@ const ScheduleManager = (() => {
   async function loadSchedules() {
     schedules = await window.TeachingDatabase.getAllSchedules();
     renderSchedules();
+    renderWeeklySchedule();
   }
 
   async function initialize() {

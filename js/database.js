@@ -94,6 +94,60 @@ const TeachingDatabase = (() => {
     return runScheduleRequest("readwrite", (store) => store.delete(id));
   }
 
+  async function getAllSettings() {
+    const database = await openDatabase();
+
+    return new Promise((resolve, reject) => {
+      const request = database
+        .transaction(STORE_NAMES.settings, "readonly")
+        .objectStore(STORE_NAMES.settings)
+        .getAll();
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error ?? new Error("Pengaturan gagal dimuat."));
+    });
+  }
+
+  async function saveSettings(settings) {
+    const database = await openDatabase();
+
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(STORE_NAMES.settings, "readwrite");
+      const store = transaction.objectStore(STORE_NAMES.settings);
+
+      settings.forEach((setting) => store.put(setting));
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error ?? new Error("Pengaturan gagal disimpan."));
+      transaction.onabort = () => reject(transaction.error ?? new Error("Penyimpanan pengaturan dibatalkan."));
+    });
+  }
+
+  async function replaceBackupData(backup) {
+    const database = await openDatabase();
+
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(
+        [STORE_NAMES.schedules, STORE_NAMES.settings],
+        "readwrite",
+      );
+      const schedulesStore = transaction.objectStore(STORE_NAMES.schedules);
+      const settingsStore = transaction.objectStore(STORE_NAMES.settings);
+
+      schedulesStore.clear();
+      settingsStore.clear();
+      backup.schedules.forEach((schedule) => schedulesStore.put(schedule));
+      backup.settings.forEach((setting) => settingsStore.put(setting));
+
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error ?? new Error("Restore data gagal."));
+      transaction.onabort = () => reject(transaction.error ?? new Error("Restore data dibatalkan."));
+    });
+  }
+
+  function clearAllData() {
+    return replaceBackupData({ schedules: [], settings: [] });
+  }
+
   return Object.freeze({
     name: DATABASE_NAME,
     stores: STORE_NAMES,
@@ -102,6 +156,10 @@ const TeachingDatabase = (() => {
     addSchedule,
     updateSchedule,
     deleteSchedule,
+    getAllSettings,
+    saveSettings,
+    replaceBackupData,
+    clearAllData,
   });
 })();
 

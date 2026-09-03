@@ -57,7 +57,7 @@
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 280px));
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .dashboard-grid {
@@ -71,4 +71,11 @@
   display: grid;
   align-content: start;
   gap: 1.25rem;
+}
+
+.dashboard-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
